@@ -45,7 +45,7 @@ var userView = Backbone.View.extend({
 
     },
   render:function(id){
-    this.model = new UserModel();
+    this.model = new UserModel({id:id});
     // this.model.unset('id');
     this.id = id;
     var that = this;
@@ -59,7 +59,6 @@ var userView = Backbone.View.extend({
 
       return false;
     } 
-    this.model.set({id:this.id});
     this.model.fetch({
       success : function(){
         var source = $('#user-info-template').html();
