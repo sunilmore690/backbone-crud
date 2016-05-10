@@ -1,122 +1,90 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <title>hello-backbonejs</title>
-  <link rel="stylesheet" href ="css/bootstrap.min.css">
-   <link rel="stylesheet" href ="css/style.css">
-     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
-   <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
-</head>
-<body>
-
-<div class ="container">
-  <h1>User Manager</h1>
-  Click to view Repositories!!
-   <hr />
-   <div class="page">
-  Loading......
-  
-   </div>
-</div>
-<div class="modal fade" id='user-modal' role="dialog">
-</div>
-<script type="text/x-handlebars-template" id="user-info-template">
-  
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title">{{#if id }}Edit {{id}} {{else}}Add {{/if}}</h4>
+   <head>
+      <meta charset="utf-8">
+      <title>hello-backbonejs</title>
+      <link rel="stylesheet" href ="css/bootstrap.min.css">
+      <link rel="stylesheet" href ="css/style.css">
+      <script src='js/libs/jquery/jquery.min.js'></script>
+      <script type="text/javascript" src="js/libs/bootstrap.min.js"></script>
+   </head>
+   <body>
+      <div class ="container">
+         <h1>User Manager</h1>
+         Click to view Repositories!!
+         <hr />
+         <div class="page">
+            Loading......
+         </div>
       </div>
-      <div class="modal-body">
-        <form>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Name</label>
-            <input type="text" class="form-control" id="exampleInputEmail1" name='name' placeholder="Email" >
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Sex</label>
-            <input type="email" class="form-control" id="exampleInputPassword1"  name='sex'  >
-          </div>
-           <div class="form-group">
-            <label for="exampleInputPassword1">age</label>
-            <input type="email" class="form-control" id="exampleInputPassword1"  name='age' >
-          </div>
-        </form> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id='updateuser'>Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-    
-</script>
-<script type="text/x-handlebars-template" id="user-list-template">
-<table class="table striped">
-<thead>
-  <tr>
-  <th> id</th>
-  <th>Name </th>
-  <th>Age </th>
-  <th> Sex</th>
-  <th><a href="#" class="btn btn-info" id='adduser'>Add </a></th>
- 
-  
- </tr>
-</thead>
-<tbody>
-{{#each this}}
-<tr id="" data-id="{{this.id}}">
- 
-  <td>{{this.id}}</td>
-  <td>{{this.name}}  </td>
-  <td>{{this.age}}</td>
-  <td> {{this.sex}}</td>
- <!--  <td><a href="#/repo/{{this.id}}" class="btn btn-primary"> View Repo</a></td> -->
-  <td><button class="btn btn-warning btn-sm" id='useredit' data-id='{{this.id}}' >Edit</button> &nbsp; <button class="btn btn-danger btn-sm" id='userdelete' data-id='{{this.id}}'>Delete</button></td>
-
- </tr>
-{{/each}}
-</tbody>
-
-
-</table>
-</script>
-<script type="text/x-handlebars-template" id="repo-list-template">
-<a href="#" > << Back</a>
-<table class="table striped">
-<thead>
-  <tr>
-  <th> id</th>
-  <th>name </th>
-  <th>full name</th>  
-
-
- </tr>
-</thead>
-<tbody>
-{{#each this}}
-<tr>
-  <td>{{this.id}}</td>
-  <td>{{this.name}} </td>
-  <td>{{this.full_name}}</td>
- </tr>
-{{/each}}
-</tbody>
-
-
-</table>
-</script>
-   
-  <script src="js/libs/underscore/underscore-min.js"></script>
-  <script src="js/libs/backbone/backbone-min.js"></script>
-  <script src="js/libs/backbone/Backbone.ModelBinder-min.js"></script>
-  <script src="js/libs/handlebars/handlebars.js"></script>
-  <script src="js/user.js"></script>
-  
-</script>  
-</body>
+      <div class="modal fade" id='user-modal' role="dialog"></div>
+      <script type="text/x-handlebars-template" id="user-info-template">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+               <h4 class="modal-title">{{#if id }}Edit {{id}} {{else}}Add {{/if}}</h4>
+             </div>
+             <div class="modal-body">
+               <form>
+                 <div class="form-group">
+                   <label for="exampleInputEmail1">Name</label>
+                   <input type="text" class="form-control" id="exampleInputEmail1" name='name' placeholder="Email" >
+                 </div>
+                 <div class="form-group">
+                   <label for="exampleInputPassword1">Sex</label>
+                   <input type="email" class="form-control" id="exampleInputPassword1"  name='sex'  >
+                 </div>
+                  <div class="form-group">
+                   <label for="exampleInputPassword1">age</label>
+                   <input type="email" class="form-control" id="exampleInputPassword1"  name='age' >
+                 </div>
+               </form> 
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" id='updateuser'>Save changes</button>
+             </div>
+           </div><!-- /.modal-content -->
+         </div><!-- /.modal-dialog -->
+           
+      </script>
+      <script type="text/x-handlebars-template" id="user-list-template">
+         <table class="table striped">
+         <thead>
+           <tr>
+           <th>id</th>
+           <th>Name </th>
+           <th>Age </th>
+           <th>Sex</th>
+           <th><a href="#" class="btn btn-info" id='adduser'>Add </a></th>
+          
+           
+          </tr>
+         </thead>
+         <tbody>
+         {{#each this}}
+         <tr id="" data-id="{{this.id}}">
+          
+           <td>{{this.id}}</td>
+           <td>{{this.name}}  </td>
+           <td>{{this.age}}</td>
+           <td> {{this.sex}}</td>
+          <!--  <td><a href="#/repo/{{this.id}}" class="btn btn-primary"> View Repo</a></td> -->
+           <td><button class="btn btn-warning btn-sm" id='useredit' data-id='{{this.id}}' >Edit</button> &nbsp; <button class="btn btn-danger btn-sm" id='userdelete' data-id='{{this.id}}'>Delete</button></td>
+         
+          </tr>
+         {{/each}}
+         </tbody>
+         
+         
+         </table>
+      </script>
+      <script src="js/libs/underscore/underscore-min.js"></script>
+      <script src="js/libs/backbone/backbone-min.js"></script>
+      <script src="js/libs/backbone/Backbone.ModelBinder-min.js"></script>
+      <script src="js/libs/handlebars/handlebars.js"></script>
+      <script src="js/script.js"></script>
+      </script>  
+   </body>
 </html>
