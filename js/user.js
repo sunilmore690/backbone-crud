@@ -8,9 +8,9 @@ var UserModel = Backbone.Model.extend({
 
 var Repos = Backbone.Collection.extend({
   model: RepoListModel,
-	initialize: function(models, options){
-		this.url ='https://api.github.com/users/'+ options.id +'/repos';
-	}
+  initialize: function(models, options){
+    this.url ='https://api.github.com/users/'+ options.id +'/repos';
+  }
 });
 
 var Users = Backbone.Collection.extend({
@@ -45,25 +45,26 @@ var userView = Backbone.View.extend({
 
     },
   render:function(id){
-    this.user = new UserModel();
-    this.user.unset('id');
+    this.model = new UserModel();
+    // this.model.unset('id');
     this.id = id;
     var that = this;
     if(!this.id){
       var source = $('#user-info-template').html();
       var template = Handlebars.compile(source);
-      var html = template(that.user.attributes);
+      var html = template(that.model.attributes);
       that.$el.html(html);
       that.bindModel()
       that.$el.modal('show'); 
+
       return false;
     } 
-    this.user.set({id:this.id});
-    this.user.fetch({
+    this.model.set({id:this.id});
+    this.model.fetch({
       success : function(){
         var source = $('#user-info-template').html();
         var template = Handlebars.compile(source);
-        var html = template(that.user.attributes);
+        var html = template(that.model.attributes);
         that.$el.html(html);
         that.bindModel()
         that.$el.modal('show'); 
@@ -94,14 +95,15 @@ var userView = Backbone.View.extend({
         //         return 'color:' + value
         //     }}]
     };
-     this._modelBinder.bind(this.user, this.el, bindings);
+     this._modelBinder.bind(this.model, this.el, bindings);
   },
    updateUser : function(e){
     var that = this;
-    this.user.save({},{
+    this.model.save({},{
       success:function(){
        that.$el.modal('hide');
        // that.$el.remove(); 
+        router.currentView.render();
       }
     })
    }
